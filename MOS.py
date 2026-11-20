@@ -1,10 +1,12 @@
 import os
 import sys
+import cv2
 
+# Made by Mithil Sadhasivam, if anyone claims this as entirely theirs, ignore them.
 notepad = 0
-my_files = 0
+progman = 0
 calc = 0
-sksks = 0
+camera = 0
 
 def run(to):
     print(f"\n--- Running {to} ---")
@@ -13,7 +15,7 @@ print("MOS 1.5 | Type 'help' for more details")
 print("Module OK")
 
 while True:
-    if notepad == 0 and my_files == 0:
+    if notepad == 0 and progman == 0 and camera == 0:
         command = input("\nCommand? ").strip().lower()
     else:
         command = ""
@@ -61,10 +63,10 @@ while True:
             notepad = 0
 
     if command == "progman":
-        my_files = 1
+        progman = 1
         run("Progman")
     
-    while my_files == 1:
+    while progman == 1:
         print("\n[PROGMAN] 1.Directory_List  2.Delete  3.Open  4.Exit")
         file_choice = input("Choice? ")
         
@@ -100,13 +102,13 @@ while True:
                 print("Error: File not found.")
         
         elif file_choice == "4":
-            my_files = 0
+            progman = 0  
             
     if command == "exit":
         sys.exit("Operating system shutdown")
 
     if command == "help":
-        print("Available commands: notepad, progman, calc, run, dir")
+        print("Available commands: notepad, progman, calc, run, dir, camera, ad-libsound")
             
     if command == "calc":
         calc = 1
@@ -129,6 +131,7 @@ while True:
                 print(x / y)     
         elif calc_choice == "2":
             calc = 0
+            
     if command == "run":
         file_to_run = input("File to run (e.g. app.py)? ")
         if os.path.exists(file_to_run):
@@ -141,7 +144,7 @@ while True:
         else:
             print("File not found on Disk A.")
 
-    valid_commands = ["notepad", "progman", "calc", "run", "help", "exit", "name a legend", "dir"]
+    valid_commands = ["notepad", "progman", "calc", "run", "help", "exit", "name a legend", "dir", "camera", "ad-libsound"]
 
     if command not in valid_commands and command != "":
         print("Bad command or file name")
@@ -154,11 +157,49 @@ while True:
         files = os.listdir('.') 
         for file in files:
             print(f" > {file}")
+
+    if command == "camera":
+        camera = 1
+        
+        cap = cv2.VideoCapture(0)
+        fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+        out = cv2.VideoWriter('output_video.avi', fourcc, 20.0, (640, 480))
+        photo_count = 0
+        print("Controls: 's' to take a photo, 'q' to quit.")
+
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
+
+            cv2.imshow('Camera Feed', frame)
+            out.write(frame)
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord('s'):
+                photo_name = f"captured_photo_{photo_count}.jpg"
+                cv2.imwrite(photo_name, frame)
+                print(f"Saved: {photo_name}")
+                photo_count += 1
+
+            if key == ord('q'):
+                break
+        cap.release()
+        out.release()
+        cv2.destroyAllWindows()
+        camera = 0
+
+# Made by Mithil Sadhasivam, if anyone claims this as entirely theirs, ignore them.
+
+    
         
         
 
     
             
+
+    
+
+
 
     
 
