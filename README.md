@@ -13,10 +13,13 @@ This operating system comes with a range of functions, including:
 [EXIT]:Ends all functions of the operating system.
 [NOTEPAD]:A simple text editor, capable of creating files on the system, editing and reading them.
 [RUN]:A function that allows you to run other Python scripts on the OS directly. It will prompt you for the file name.
-     [NOTE]:When prompted for the file name, be sure to add the extension(e.g: .py)
+    [NOTE]:When prompted for the file name, be sure to add the extension(e.g: .py)
 [HELP]: Lists all the commands in the program.
 [CAMERA]: It is what it is named.
 
+Apps I added for this OS:
+[HAMURABI] An Apple-1 style game where you play as an Ancient Sumerian King
+[CALC] Even though I added this app, The OS already has a calculator, so IDK what to do with this.
 
 The creator hopes you might find this project as inspiration to build better apps for this OS.
 So long, Nerds.
